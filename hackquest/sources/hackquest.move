@@ -6,7 +6,6 @@ module hackquest::hackquestdemo {
     const NAME: vector<u8> = b"Hackquest Demo";
     const SYMBOL: vector<u8> = b"hackquestdemo";
     const DESCRIPTION: vector<u8> = b"Hackquest Demo Token as Part of Learning Track";
-    const ICON_URL: vector<u8> = b"https://example.com/hackquestdemo.png";
 
     public struct HACKQUESTDEMO has drop {}
 
@@ -17,7 +16,7 @@ module hackquest::hackquestdemo {
             string::utf8(SYMBOL),
             string::utf8(NAME),
             string::utf8(DESCRIPTION),
-            string::utf8(ICON_URL),
+            string::utf8(b""),
             ctx,
         );
         let metadata_cap = coin_registry::finalize(builder, ctx);
