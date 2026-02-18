@@ -2,7 +2,7 @@
 #[test_only]
 module hackquest::hackquest_tests;
 // uncomment this line to import the module
-// use hackquest::hackquest;
+// use hackquest::hackquestdemo;
 
 #[error(code = 0)]
 const ENotImplemented: vector<u8> = b"Not Implemented";
