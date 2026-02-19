@@ -1,0 +1,13 @@
+[package]
+name = "locked_stake"
+version = "5.0.0"
+edition = "2024.beta"
+
+[dependencies]
+Sui = { git = "https://github.com/MystenLabs/sui.git", subdir = "crates/sui-framework/packages/sui-framework", rev = "framework/testnet" }
+SuiSystem = { git = "https://github.com/MystenLabs/sui.git", subdir = "crates/sui-framework/packages/sui-system", rev = "framework/testnet" }
+
+[addresses]
+locked_stake = "0x0"
+sui = "0x2"
+sui_system = "0x3"

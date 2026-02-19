@@ -1,5 +1,11 @@
 # HackQuest SUI Blockchain Tutorial
 
+1. [Publishing a Coin](./hackquest)
+2. [Publishing a NFT](./hackquest_nft)
+3. [Staking](./locked_stake)
+
+## 1. Publishing a Coin
+
 ### Getting Started
 
 Initialize the SUI project
@@ -45,6 +51,8 @@ sui client call --package [recorded package ID] --module hackquestdemo  --functi
 
 Go to `https://faucet.sui.io/?address=<your address>` to click for more SUI tokens.
 
+## 2. Publishing a NFT
+
 ### Viewing the NFT Transaction History
 
 Obtain the SUI address,
@@ -87,3 +95,55 @@ export MINTRECORD="0xd9c92790a50a406abf1dfc5266346376c7b1cf556571d917d74979c27b1
 export NFT="0x4c70ef4fc8e0077dd8fe9bb6477509f9585c85dfd607b04fd5d52df6bc2d26ed"
 sui client call --package $PACKAGE --module $MODULE --function burn --args $MINTRECORD $NFT --gas-budget 100000000
 ```
+
+## 3. Staking
+
+View transaction after publish here: https://suiscan.xyz/testnet/tx/C8hioAFLgWV4zkfYcqu7JxvDQUPuJw7XRVSjDEp6fSJ5
+
+Obtain the package ID and then call,
+
+```
+sui client ptb --move-call 0x14161048af697c6bc6c09d34d8044d660252b97e01d1c20916fd59f54827aebe::locked_stake::new 5000
+```
+
+_Note that `5000` is a guess. Increase as necessary for the epoch_
+
+Reference: https://suiscan.xyz/testnet/tx/3LDyiVZdY2u5NdA6ubZ1HNE3oak2xbaS2duEx4PVyL3M
+
+### Storing Funds
+
+```
+sui client call --package <package ID> --module locked_stake --function deposit_sui --args <LOCKED_STAKE_ID> <GAS_COIN_OBJECT_ID> 
+```
+
+```
+sui client call --package 0x14161048af697c6bc6c09d34d8044d660252b97e01d1c20916fd59f54827aebe --module locked_stake --function deposit_sui --args 0x2b3a12bdf83a6d98f86d089d9fc14ac8379fa417c55c8bdefd88cbe365dda786 0xc84d9787baa0eba26e34c2836d0c14c8a5751ddc47d0441b4f75144dcdb05fc4 
+```
+Refer: https://suiscan.xyz/testnet/tx/BV3mAkCoLWjHxvZKzE4xhQ6ofJnGTX3LstcRF77Z9238
+
+
+### Obtaining Balance
+
+```
+sui client call --package 0x14161048af697c6bc6c09d34d8044d660252b97e01d1c20916fd59f54827aebe --module locked_stake --function sui_balance --args 0x2b3a12bdf83a6d98f86d089d9fc14ac8379fa417c55c8bdefd88cbe365dda786
+```
+
+### Staking
+
+```
+sui client call --package <package id> --module locked_stake --function stake --args <LOCKED_STAKE_ID> 0x5 1000000000 <VALIDATOR_ADDRESS> --gas <GAS_COIN_OBJECT_ID> --gas-budget 50000000
+```
+
+```
+sui client call --package 0x14161048af697c6bc6c09d34d8044d660252b97e01d1c20916fd59f54827aebe --module locked_stake --function stake --args 0x2b3a12bdf83a6d98f86d089d9fc14ac8379fa417c55c8bdefd88cbe365dda786 0x5 1000000000 0x44b1b319e23495995fc837dafd28fc6af8b645edddff0fc1467f1ad631362c23 --gas 0x43d0c7a61c83bd3c5bcfb5224197d248367578997b07023446f67d05b08471b4 --gas-budget 50000000
+```
+
+Refer: https://suiscan.xyz/testnet/tx/8T5Vob7JvdGRuDf1B29m539dfqKM6iR7uWXK3kJT6ETj
+
+### Unstaking
+
+```
+sui client call --package 0x14161048af697c6bc6c09d34d8044d660252b97e01d1c20916fd59f54827aebe --module locked_stake  --function unstake --args 0x2b3a12bdf83a6d98f86d089d9fc14ac8379fa417c55c8bdefd88cbe365dda786 0x5 0xd5cd8bc5ce3efe8b27247505f87a019b5405df672773836783841946f009de63
+```
+
+Refer: https://suiscan.xyz/testnet/tx/2cHrsZkN9i44YhmzUZQ2f27hx9hn9zXHmVkEqH5aPZHa
