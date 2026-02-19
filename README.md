@@ -23,12 +23,16 @@ sui move build
 sui client publish --gas-budget 5000000000
 ```
 
-And find the published transaction in Testnet.
+Transaction Link: https://suiscan.xyz/testnet/tx/Gi94eUwkGpMudwtx9BZUh1ytuVEd4SDaverBa9u38z1m
 
-> - Transaction Link: https://suiscan.xyz/testnet/tx/Gi94eUwkGpMudwtx9BZUh1ytuVEd4SDaverBa9u38z1m
+### Minting Tokens
+
+Find the published transaction in Testnet.
+
 > - Package ID: `0x03da33646d23b50afd5365e2f861156b521a84111f17a21d27a1ec4c1b7f0472`
 > - Treasury Cap ID: `0xbd290799fa7598be21351753e42abc1fc0680d2354084e0d8ae421e31f400ba1` (Account Address)
-> - Recipient Address: `0xb607f8885f16891551e6f3a2105fedf1383f4b1fbb7314f2bf3bb87d21f8539c`
+> - Recipient Address: `0x848f974492fcc0482429a47a80e6b9ae4c80299b11685639915c6f1e97f8aee8`
+
 
 Run the following to Mint some tokens
 
@@ -44,6 +48,40 @@ sui client call --package [recorded package ID] --module hackquestdemo  --functi
 >   --args <TREASURY_CAP_ID> 100 <RECIPIENT_ADDRESS> \
 >   --gas-budget 100000000
 > ```
+
+```
+sui client call --package 0x03da33646d23b50afd5365e2f861156b521a84111f17a21d27a1ec4c1b7f0472 --module hackquestdemo --function burn --args 0xbd290799fa7598be21351753e42abc1fc0680d2354084e0d8ae421e31f400ba1 <SPLIT_COIN_ID>
+```
+
+Refer: https://suiscan.xyz/testnet/tx/41jjJnPAtL7wJekRHNfzucY6hN97VDb8FfwLqUKUF9n9
+
+### Burning Tokens
+
+Firstly, split the tokens (e.g. 50 tokens),
+
+```
+sui client split-coin --coin-id <YOUR_HACKQUESTDEMO_OBJECT_ID> --amounts 50 --gas-budget 10000000
+```
+
+In which becomes (use object ID of a transaction),
+
+```
+sui client split-coin --coin-id 0xd2923fd271dba2a1826df032e11b8f9a035c5f9107d234da056d7bcdfa2020a5 --amounts 50 --gas-budget 10000000
+```
+
+Then burn the splited coin,
+
+```
+sui client call --package 0xd51732128687125b406d8f0a28bbd8e18cf5f513f9c4940f47532bfb93cadfac --module hackquestdemo --function burn --args 0xbd290799fa7598be21351753e42abc1fc0680d2354084e0d8ae421e31f400ba1 0xcb4f5ab2d144d3c8c434d39a32cae311027df4b353e97ebe917d681528eb436a --gas-budget 10000000
+```
+
+Refer: https://suiscan.xyz/testnet/tx/7zgThBGJ4eHGNoTRS12XJiHLoexQvrdmtmaaH8rse5Ty
+
+### Updating Packages
+
+```
+sui client upgrade --upgrade-capability 0x5451b60c48247d2031f5341b9ad83eabe66c71a0c8db7a5e44602bdd06a7d7e1 --gas-budget 100000000
+```
 
 ### Increasing SUI Tokens
 

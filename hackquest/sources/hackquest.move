@@ -1,6 +1,6 @@
 module hackquest::hackquestdemo {
     use std::string;
-    use sui::coin::{Self, TreasuryCap};
+    use sui::coin::{Self, Coin, TreasuryCap};
     use sui::coin_registry;
 
     const NAME: vector<u8> = b"Hackquest Demo";
@@ -32,5 +32,12 @@ module hackquest::hackquestdemo {
     ) {
         let coin = coin::mint(treasury_cap, amount, ctx);
         sui::transfer::public_transfer(coin, recipient);
+    }
+
+    public fun burn(
+        treasury_cap: &mut TreasuryCap<HACKQUESTDEMO>,
+        burn_coin: Coin<HACKQUESTDEMO>,
+    ): u64 {
+        coin::burn(treasury_cap, burn_coin)
     }
 }
