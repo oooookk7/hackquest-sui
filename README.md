@@ -72,6 +72,10 @@ sui client split-coin --coin-id 0xd2923fd271dba2a1826df032e11b8f9a035c5f9107d234
 Then burn the splited coin,
 
 ```
+sui client call --package <PACKAGE_ID> --module hackquestdemo --function burn --args <TREASURY_CAP_ID> <BURN_COIN_ID> --gas-budget <GAS_BUDGET_MIST>
+```
+
+```
 sui client call --package 0xd51732128687125b406d8f0a28bbd8e18cf5f513f9c4940f47532bfb93cadfac --module hackquestdemo --function burn --args 0xbd290799fa7598be21351753e42abc1fc0680d2354084e0d8ae421e31f400ba1 0xcb4f5ab2d144d3c8c434d39a32cae311027df4b353e97ebe917d681528eb436a --gas-budget 10000000
 ```
 
